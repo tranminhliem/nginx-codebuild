@@ -215,7 +215,7 @@
                 "LaunchType": "FARGATE",
                 "LoadBalancers": [
                     {
-                        "ContainerName": "nginx",
+                        "ContainerName": "nginx-container",
                         "ContainerPort": 80,
                         "TargetGroupArn": {
                             "Ref": "ALBTargetGroup"
@@ -267,7 +267,7 @@
                                 "awslogs-stream-prefix": "nginx"
                             }
                         },
-                        "Name": "nginx",
+                        "Name": "nginx-container",
                         "PortMappings": [
                             {
                                 "ContainerPort": 80
