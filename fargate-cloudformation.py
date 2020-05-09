@@ -185,7 +185,7 @@ TaskDefinition = t.add_resource(ecs.TaskDefinition(
     ExecutionRoleArn=GetAtt(TaskExecutionRole, "Arn"),
     ContainerDefinitions=[
         ecs.ContainerDefinition(
-            Name="nginx",
+            Name="nginx-container",
             Image=Ref(NginxImage),
             Essential=True,
             PortMappings=[ecs.PortMapping(ContainerPort=80)],
@@ -193,7 +193,7 @@ TaskDefinition = t.add_resource(ecs.TaskDefinition(
                 LogDriver="awslogs",
                 Options={"awslogs-group": Ref(CWLogGroup),
                          "awslogs-region": Ref("AWS::Region"),
-                         "awslogs-stream-prefix": "nginx"}
+                         "awslogs-stream-prefix": "nginx-container"}
             )
         )
     ]
@@ -208,7 +208,7 @@ Service = t.add_resource(ecs.Service(
     LaunchType="FARGATE",
     LoadBalancers=[
         ecs.LoadBalancer(
-            ContainerName="nginx",
+            ContainerName="nginx-container",
             ContainerPort=80,
             TargetGroupArn=Ref(ALBTargetGroup)
         )
